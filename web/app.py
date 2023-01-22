@@ -17,7 +17,7 @@ def generate_subtexts(description):
         pre_text, post_text = description.split("/", 1)
         post_tokens = post_text.split(" ")
         if pre_text:
-            yield "{} {}".format(pre_text, " ".join(post_tokens[1:]))
+            yield f'{pre_text} {" ".join(post_tokens[1:])}'
         yield " ".join(post_tokens)
     yield description.replace(",", "")
 
@@ -47,7 +47,7 @@ def parse_quantities(ingredient):
             parser = "ingreedypy+pint"
         except Exception:
             return None, None, parser
-    if not total > 0:
+    if total <= 0:
         return None, None, parser
 
     magnitude = round(total.magnitude, 2)
